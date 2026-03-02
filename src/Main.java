@@ -36,58 +36,53 @@ public class Main {
                         trianglePoints.add(allPoints.get(pointIndex));
                     }
                 }
-
-                br.close();
             }
+            br.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return trianglePoints.toArray(new Float3[trianglePoints.size()]);
     }
 
-    public static void main(String[] args) {
+    public static Float3[] generateRandomColours(Float3[] objectPoints) {
         Random rand = new Random();
-
-        //Cube
-        Float3[] cubePoints = LoadObjFile("cube.obj");
-        Float3[] cubeColours = new Float3[(int) (cubePoints.length / 3)];
-
-        for (int i = 0; i < cubeColours.length; i++) {
-            cubeColours[i] = new Float3(0, 0, 200+rand.nextFloat(55));
+        Float3[] newObjectColours = new Float3[(int) (objectPoints.length / 3)];
+        for (int i = 0; i < newObjectColours.length; i++) {
+            newObjectColours[i] = new Float3(rand.nextFloat(255), rand.nextFloat(255), rand.nextFloat(255));
         }
+        return newObjectColours;
+    }
 
+    public static void main(String[] args) {
+        String imageFileName = "replace_with_image_name";
+        imageFileName = "cubeTest";
+
+        // Cube Example
+        Float3[] cubePoints = LoadObjFile("objs/cube.obj");
+        Float3[] cubeColours = generateRandomColours(cubePoints);
         Model cubeModel = new Model(cubePoints, cubeColours);
+        Float3 cubePosition = new Float3(0, -1, 7);
+        Float2 cubeRotation = new Float2(20, -10);
 
-        //Centurion
-        Float3[] centurionPoints = LoadObjFile("roman_centurion.obj");
-        Float3[] centurionColours = new Float3[(int) (centurionPoints.length / 3)];
 
-        for (int i = 0; i < centurionColours.length; i++) {
-            centurionColours[i] = new Float3(255, rand.nextFloat(255), rand.nextFloat(255));
-        }
+        /* Add more objects to the scene using the following format:
+            Float3[] myObjectPoints = LoadObjFile("myObject.obj");
+            Float3[] myObjectColours = generateRandomColours(myObjectPoints);
+            Model myObjectModel = new Model(myObjectPoints, myObjectColours);
+            Float3 myObjectPosition = new Float3(x, y, z);
+            Float2 myObjectRotation = new Float2(x, y);
+        */
 
-        Model centurionModel = new Model(centurionPoints, centurionColours);
-
-        //Cat Obj
-        Float3[] catPoints = LoadObjFile("cat.obj");
-        Float3[] catColours = new Float3[(int) (catPoints.length / 3)];
-
-        for (int i = 0; i < catColours.length; i++) {
-            catColours[i] = new Float3(213 + rand.nextFloat(42), 207 + rand.nextFloat(48), 255);
-        }
-
-        Model catModel = new Model(catPoints, catColours);
-
-        //Rendering stuff
+        // Rendering Stuff
         Renderer renderer = new Renderer();
 
         RenderTarget renderTarget;
 
-        String fileName = "whattheheck" + ".bmp";
+        String fileName = "renderedImages/" + imageFileName + ".bmp";
 
         renderTarget = new RenderTarget(500, 500);
-        renderer.render(cubeModel, renderTarget, fileName, new Transform(new Float3(0, -3, 5), new Float2(0, 0)));
-        renderer.render(centurionModel, renderTarget, fileName, new Transform(new Float3(0, 0, 5), new Float2(180, 0)));
-        renderer.render(catModel, renderTarget, fileName, new Transform(new Float3(35, 20, 100), new Float2(150, 0)));
+
+        renderer.render(cubeModel, renderTarget, fileName, new Transform(cubePosition, cubeRotation));
+        // Add more lines like the previous for each object you add.
     }
 }
