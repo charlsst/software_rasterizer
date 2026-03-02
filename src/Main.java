@@ -1,3 +1,8 @@
+/*
+This is the only script you'll need to edit for general use.
+Please refer to main for changes you can make (adding objects, changing positions, etc).
+*/
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;

@@ -1,3 +1,7 @@
+# As an additional tool, you can compile rendered images into a gif using this program!
+# I made a loop in Main.java with slight adjustments to position/rotation data.
+# By saving these all in a folder (and ordering them correctly) I could use this to make it a gif!
+
 import os
 from PIL import Image
 
