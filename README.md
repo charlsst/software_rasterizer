@@ -1,2 +1,5 @@
 # software_rasterizer
-A java-based software rasterizer that takes in OBJ files and positions and renders them as 'bmp' files. Based off of 'Sebastian Lague'.
+A java-based software rasterizer that takes in OBJ files and positions and renders them as 'bmp' files.
+This is a project I did back in July 2025, but I'm uploading it here now (March 2026).
+
+Based off of Sebastian Lague's video: '[Coding Adventure: Software Rasterizer](https://youtu.be/yyJ-hdISgnw?si=lsu0-jGDEFdleMPO)'.
